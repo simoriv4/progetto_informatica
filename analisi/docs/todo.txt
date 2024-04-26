@@ -1,0 +1,29 @@
+PROVA D'ESAME BICICLETTE
+	- crea db con relazioni che sono state trovate tramite analisi(file word)
+	- programma un sito che consenta di fare ciò che è richiesto dalla consegna--> metti anche mappa (google api)--> crea custom pin all'interno della mappa
+	
+	
+	
+	- utenti
+			- cliente
+			- dipendente
+	
+CASI D'USO
+- cliente:
+		- noleggia
+		- consegnare
+		- visualizzare mappa
+- cliente:
+		- visualizzare mappa--> pagina pubblica nella programmazione--> non serve l'autenticazione
+		- registra
+		
+		
+RIGUARDA CASI D'USO
+
+
+GPS su bici--> gestisci la ricarica--> mettii una dinamo sulla bici
+								   --> ricarica wireless quando è riportata in stazione--> quando si collega a RFID 
+
+gps serve per capire quanti km ha fatto-> quando fare manutenzione
+
+nel DB si salve LAT e LONG-> float 32 bit
