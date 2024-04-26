@@ -32,3 +32,4 @@ nel DB si salve LAT e LONG-> float 32 bit
 
 
 quando l'utente che usa la carta di credito per pagare--> richiedere alla banca (SISTEMA ESTERNO) di ricevere quella somma di denaro
+della cart di credito salvo solo il numero di carta( faccio finta che non serva cvc e data di scadenza)
