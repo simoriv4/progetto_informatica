@@ -27,3 +27,8 @@ GPS su bici--> gestisci la ricarica--> mettii una dinamo sulla bici
 gps serve per capire quanti km ha fatto-> quando fare manutenzione
 
 nel DB si salve LAT e LONG-> float 32 bit
+
+
+
+
+quando l'utente che usa la carta di credito per pagare--> richiedere alla banca (SISTEMA ESTERNO) di ricevere quella somma di denaro

@@ -4,6 +4,8 @@ left to right direction
 actor "Cliente registrato" as C
 actor Sistema as S
 actor Admin as A
+actor Banca as B
+
 ' actor Stampe as ST
 
 rectangle "Cliente registrato" {
@@ -12,15 +14,22 @@ rectangle "Cliente registrato" {
     C --> (Consegnare)
     C --> (Visualizzare Mappa)
 }
+rectangle Banca {
+    B --> (Ricezione richieste di denaro)
+    B --> (Pagamento)
+    B --> (Approvazione richieste di denaro)
+}
 rectangle Visualizza{
     (visualizza informazioni)
 }
 (Cliente registrato)-->(Visualizza)
 ' gestisce transazioni tra utente e sistema
 rectangle "Sistema Centrale" {
-    S --> (Pagina Pubblica nella Programmazione)
-    S --> (Registra)
+    S --> (Calcoli per monitoraggio)
+    S --> (Tariffazione servizio)
     S --> (Manutenzione)
+    S --> (Richiesta denaro alla banca)
+    (Richiesta denaro alla banca)--> (Ricezione richieste di denaro)
 
 }
 
