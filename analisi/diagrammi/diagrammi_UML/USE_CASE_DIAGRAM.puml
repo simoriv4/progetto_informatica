@@ -15,9 +15,7 @@ rectangle "Cliente registrato" {
     C --> (Visualizzare Mappa)
 }
 rectangle Banca {
-    B --> (Ricezione richieste di denaro)
-    B --> (Pagamento)
-    B --> (Approvazione richieste di denaro)
+    B --> (Gestione richiesta pagamento)
 }
 rectangle Visualizza{
     (visualizza informazioni)
@@ -29,10 +27,12 @@ rectangle "Sistema Centrale" {
     S --> (Tariffazione servizio)
     S --> (Manutenzione)
     S --> (Richiesta denaro alla banca)
-    (Richiesta denaro alla banca)--> (Ricezione richieste di denaro)
-
 }
-
+rectangle "richiesta denaro a banca"{
+    (Invio richiesta alla banca)
+    (Ricezione risposta da banca)
+}
+(Richiesta denaro alla banca) --> (richiesta denaro a banca)
 rectangle "Admin" {
     A --> (Monitoraggio)
     A --> (Registra)
