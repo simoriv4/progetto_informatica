@@ -36,3 +36,6 @@ della cart di credito salvo solo il numero di carta( faccio finta che non serva 
 
 schema er
 noleggia è solo un'associazzione-_> non c'è aassociazione consegna--> attributi che permettono di capire in quale stazione viene consegnata
+
+
+l'admin è una tabella a se stante per questioni di sicurezza --> per noleggiare una bici deve creare un account cliente in modo che dalla web app del telefono non vengano rubati dati sensibili con cui effettuare operazioni importanti (manutenzione, leggere distanze bici...)
