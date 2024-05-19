@@ -3,7 +3,7 @@ let map;
 
 async function initMap() {
   // The location of Uluru
-  const position = { lat: 45.7802183, lng: 9.244996 };
+  const position = { lat: 45.4627338, lng: 9.1777323};
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -11,18 +11,36 @@ async function initMap() {
 
   // The map, centered at Uluru
   map = new Map(document.getElementById("map"), {
-    zoom: 15,
+    zoom: 12,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
+  // const marker = new AdvancedMarkerElement({
+  //   map: map,
+  //   position: position,
+  //   title: station.name,
+  // });
 
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: "bici1",
-  });
+set_posizion_stazione(AdvancedMarkerElement);
 }
+function set_posizion_stazione(AdvancedMarkerElement) {
+  // ottengo tutte le stazioni dal db
+  $.get("../AJAX/set_position.php", {}, function (data) {
+    if (data["status"] == "ok") {
+      data.stations.forEach(station => {
+        const position = { lat: station.lat, lng: station.lng };
+        const marker = new AdvancedMarkerElement({
+          map: map,
+          position: position,
+          title: station.name,
+        });
+      });
+    }
+    else if (data["status"] == "ko") {
+      alert(data["message"]);
+    }
+  });
 
+}
 initMap();
 
