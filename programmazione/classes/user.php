@@ -26,10 +26,25 @@ class user
         // controllo se esiste un account con quello username
         $mysqli = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
         // query select
-        $query = "SELECT * FROM `utenti` WHERE  username='$user' AND password=MD5('$password')";
+        $query = "SELECT * FROM `user` WHERE  username='$user' AND password=MD5('$password')";
         
         $result = $mysqli->query($query);
         if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            //controllo se è admin o meno
+            //query
+            $id = $row["ID"];
+            $query = "SELECT * FROM `admin` WHERE ID_user='$id'";
+            $result = $mysqli->query($query);
+
+            // imposto se l'utente è admin o no
+            if ($result->num_rows > 0) {
+                $_SESSION["is_admin"] = true;
+            }
+            else{
+                $_SESSION["is_admin"] = false;
+            }
+
             $mysqli->close();
             return true; // utente trovato
         }
@@ -37,31 +52,11 @@ class user
         return false; // utente non esistente
     }
 
-    public function check_credential_sign_up($user, $password)
-    {
-        // controllo se esiste un account con quello username
-        $mysqli = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
-        $is_studente = $this->is_studente($user);
-        if ($is_studente) {
-            // query select
-            $query = "SELECT * FROM `studenti` WHERE  username='$user' AND password=MD5('$password')";
-        } else {
-            // query select
-            $query = "SELECT * FROM `professori` WHERE  username='$user' AND password=MD5('$password')";
-        }
-        $result = $mysqli->query($query);
-        if ($result->num_rows == 0) {
-            $mysqli->close();
-            return true; // utente non presente nel db
-        }
-        $mysqli->close();
-        return false; // utente già esistente
-    }
-    public function signUp($user, $password, $mail, $classes)
+    public function signUp($user, $password, $mail, $smart_card, $ID_indirizzo)
     {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         //  controllo che l'untente non esista
-        if ($this->check_credential_sign_up($user, $password)) {
+        if (!$this->check_credential($user, $password)) {
             $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
 
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -116,7 +111,7 @@ class user
                 $conn->close();
                 return false;
             }
-        }
+        }   
     }
 
    

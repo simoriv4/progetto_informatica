@@ -31,6 +31,7 @@ function set_posizion_stazione(AdvancedMarkerElement) {
           position: position,
           title: station.name,
         });
+        
       });
     } else if (data["status"] == "ko") {
       alert(data["message"]);

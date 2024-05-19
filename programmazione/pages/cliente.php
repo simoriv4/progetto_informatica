@@ -23,7 +23,16 @@ if (!isset($_SESSION))
                 }
             }, 'json');
         }
-
+        function logout() {
+        $.get("../AJAX/logout.php", {}, function (data) {
+            if (data["status"] == "ok") {
+                window.location.href = "login.php";
+            }
+            else if (data["status"] == "ko") {
+                alert(data["message"]);
+            }
+        }, 'json');
+    }
         $(document).ready(function () {
             show_rides();
         });

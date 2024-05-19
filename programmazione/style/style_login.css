@@ -1,0 +1,30 @@
+body {
+    background-color: #E0C097; /* Colore beige dal logo */
+}
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    background: #FFF8E1; /* Beige chiaro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #A0522D; /* Ombra marrone */
+}
+
+h1 {
+    color: #A0522D; /* Marrone dal logo */
+}
+
+.btn-primary {
+    background-color: #A0522D; /* Marrone */
+    border-color: #A0522D; /* Marrone */
+}
+
+.btn-primary:hover {
+    background-color: #8B4513; /* Marrone scuro */
+    border-color: #8B4513; /* Marrone scuro */
+}
+
+.register-link a {
+    color: #A0522D; /* Marrone */
+}

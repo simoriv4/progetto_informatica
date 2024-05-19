@@ -1,0 +1,41 @@
+body {
+    background-color: #E0C097; /* Colore beige dal logo */
+}
+
+#intestazione {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #A0522D; /* Marrone dal logo */
+    border: none;
+}
+
+.btn-primary {
+    background-color: #A0522D; /* Marrone */
+    border-color: #A0522D; /* Marrone */
+}
+
+.btn-primary:hover {
+    background-color: #8B4513; /* Marrone scuro */
+    border-color: #8B4513; /* Marrone scuro */
+}
+
+.btn-secondary {
+    background-color: #FFD700; /* Oro dal logo */
+    border-color: #A0522D; /* Marrone */
+}
+
+.btn-secondary:hover {
+    background-color: #FFA500; /* Arancione */
+    border-color: #A0522D; /* Marrone */
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 2px solid #A0522D; /* Bordo marrone */
+}
