@@ -2,45 +2,40 @@
 let map;
 
 async function initMap() {
-  // The location of Uluru
-  const position = { lat: 45.4627338, lng: 9.1777323};
+  // The location of Milano
+  const position = { lat: 45.4627338, lng: 9.1777323 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  // The map, centered at Uluru
+  // The map, centered at Milano
   map = new Map(document.getElementById("map"), {
-    zoom: 12,
+    zoom: 11,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
-  // const marker = new AdvancedMarkerElement({
-  //   map: map,
-  //   position: position,
-  //   title: station.name,
-  // });
 
-set_posizion_stazione(AdvancedMarkerElement);
+  set_posizion_stazione(AdvancedMarkerElement);
 }
+
 function set_posizion_stazione(AdvancedMarkerElement) {
-  // ottengo tutte le stazioni dal db
+  // Ottengo tutte le stazioni dal db
   $.get("../AJAX/set_position.php", {}, function (data) {
+    // console.log(data);
     if (data["status"] == "ok") {
       data.stations.forEach(station => {
-        const position = { lat: station.lat, lng: station.lng };
+        const position = { lat: parseFloat(station.lat), lng: parseFloat(station.lng) };
         const marker = new AdvancedMarkerElement({
           map: map,
           position: position,
           title: station.name,
         });
       });
-    }
-    else if (data["status"] == "ko") {
+    } else if (data["status"] == "ko") {
       alert(data["message"]);
     }
-  });
-
+  }, 'json');
 }
-initMap();
 
+initMap();

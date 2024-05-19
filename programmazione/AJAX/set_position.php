@@ -1,25 +1,32 @@
 <?php
-include_once ("../classes/station");
+header('Content-Type: application/json');
+if (!isset($_SESSION))
+    session_start();
+// creo connessione con il db
 $servername = "localhost";
 $username_db = "root";
 $password_db = "";
 $dbname = "noleggio_bici";
-// controllo se esiste un account con quello username
-$mysqli = new mysqli($servername, $username_db, $password_db, $dbname);
-// query select
-$query = "SELECT s.ID as ID, i.lat as lat, i.lon as lon FROM stazione JOIN indirizzo as i ON i.ID = s.ID_indirizzo";
-$result = $mysqli->query($query);
-$stazioni = array();
-$response = array();
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $stazione = new station("stazione " . $row["ID"] . "", $row["lat"], $row["lon"]);
-        $stazioni[] = $row;
-    }
-    $response["status"] = "ok";
-    $response["stations"] = $stazioni;
+
+$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+// verifico la connessione
+if ($conn->connect_error)
+    die("Connection failed: " . $conn->connect_error);
+
+// query per ottenere le stazioni
+$query = 'SELECT s.ID, s.ID_indirizzo, i.lat, i.lon, i.via, i.n_civico 
+            FROM stazione s 
+            JOIN indirizzo i ON s.ID_indirizzo = i.ID';
+$stmt = $conn->query($query);
+
+$stazioni = [];
+while ($row = $stmt->fetch_assoc()) {
+    $stazioni[] = [
+        'id' => $row['ID'],
+        'lat' => $row['lat'],
+        'lng' => $row['lon'], 
+        'name' => $row['via'] . ' ' . $row['n_civico']
+    ];
 }
 
-$mysqli->close();
-echo $response;
-?>
+echo json_encode(['status' => 'ok', 'stations' => $stazioni]);
