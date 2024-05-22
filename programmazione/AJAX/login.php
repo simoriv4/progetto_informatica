@@ -21,7 +21,10 @@ if (isset($_SESSION["username"])) {
             $_SESSION["username"] = $username;
             // utente presente nel db
             $response["status"] = "ok";
-            $response["message"] = "login effettuato";
+            if(isset($_SESSION["is_admin"]) && !$_SESSION["is_admin"])
+                $response["message"] = "cliente";
+            else if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"])
+                $response["message"] = "admin";
         } else {
             // errore nella ricerca dell'utente dal db
             $response["status"] = "ko";

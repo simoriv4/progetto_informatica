@@ -1,6 +1,15 @@
 <?php
-if (!isset($_SESSION))
+if (!isset($_SESSION)) {
     session_start();
+}
+// echo $_SESSION["is_admin"];
+if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
+    header("Location: admin.php");
+    exit();
+} else if (isset($_SESSION['is_admin']) && !$_SESSION["is_admin"]) {
+    header("Location: cliente.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +30,7 @@ if (!isset($_SESSION))
                 username: $("#username").val(),
                 password: $("#password").val()
             }, function (data) {
+                // alert(data["message"]);
                 if (data["status"] == "ok") {
                     if (data["message"] == "admin")
                         window.location.href = "admin.php";

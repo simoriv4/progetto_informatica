@@ -8,7 +8,7 @@ if(isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"]))
     header("Location : index.php");
     die;
 }
-else if(($_SESSION["is_admin"])){
+else if(!isset($_SESSION["is_admin"])){
     // utente non loggato
     header("Location: login.php");
 }

@@ -2,12 +2,10 @@
 if (!isset($_SESSION))
     session_start();
 
-if(isset($_SESSION["is_admin"]) && ($_SESSION["is_admin"]))
-{
+if (isset($_SESSION["is_admin"]) && ($_SESSION["is_admin"])) {
     header("Location : index.php");
     die;
-}
-else if($_SESSION["is_admin"]){
+} else if ($_SESSION["is_admin"]) {
     // utente non loggato
     header("Location: admin.php");
 }
@@ -35,23 +33,28 @@ else if($_SESSION["is_admin"]){
             }, 'json');
         }
         function logout() {
-        $.get("../AJAX/logout.php", {}, function (data) {
-            if (data["status"] == "ok") {
-                window.location.href = "login.php";
-            }
-            else if (data["status"] == "ko") {
-                alert(data["message"]);
-            }
-        }, 'json');
-    }
+            $.get("../AJAX/logout.php", {}, function (data) {
+                if (data["status"] == "ok") {
+                    window.location.href = "login.php";
+                }
+                else if (data["status"] == "ko") {
+                    alert(data["message"]);
+                }
+            }, 'json');
+        }
         $(document).ready(function () {
             show_rides();
+            $("#logout").click(function () {
+                logout();
+            });
         });
     </script>
 </head>
 
 <body>
-        <div class="rides"></div>
+    <button type="button" class="btn btn-secondary" id="logout">logout</button>
+
+    <div class="rides"></div>
 </body>
 
 </html>
