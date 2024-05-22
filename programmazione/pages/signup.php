@@ -4,8 +4,8 @@ if (!isset($_SESSION))
 
 if(isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"]))
 {
-    echo("l'utente non ha i permessi per effettuare l'operazione");
-    header("Location : index.php");
+    echo("L'utente non ha i permessi per effettuare l'operazione");
+    header("Location: index.php");
     die;
 }
 else if(!isset($_SESSION["is_admin"])){
@@ -18,106 +18,17 @@ else if(!isset($_SESSION["is_admin"])){
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Registrazione</title>
     <!-- Includi Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Includi jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Includi il CSS personalizzato -->
     <link rel="stylesheet" type="text/css" href="../style/style_login.css">
+    <!-- Includi Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
-<script>
-        $(document).ready(function() {
-            $("#registra").click(function() {
-                signUp();
-            });
-
-            $("#tornaIndietro").click(function() {
-                window.location = "index.php";
-            });
-        });
-
-        function signUp() {
-            var nome = $('#nome').val().trim();
-            var cognome = $('#cognome').val().trim();
-            var email = $('#email').val().trim();
-            var password = $('#password').val().trim();
-            var numeroTessera = $('#numeroTessera').val().trim();
-            var numeroCartaCredito = $('#numeroCartaCredito').val().trim();
-            var stato = $('#stato').val().trim();
-            var provincia = $('#provincia').val().trim();
-            var paese = $('#paese').val().trim();
-            var cap = $('#cap').val().trim();
-            var via = $('#via').val().trim();
-
-            if (!nome || !cognome || !email || !password || !numeroTessera || !numeroCartaCredito ||
-                !stato || !provincia || !paese || !cap || !via) {
-                alert("Tutti i campi sono obbligatori.");
-                return false;
-            }
-
-            if (!/^[a-zA-Z ]+$/.test(nome) || !/^[a-zA-Z ]+$/.test(cognome)) {
-                alert("Nome e cognome devono contenere solo lettere e spazi.");
-                return false;
-            }
-
-            if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/.test(email)) {
-                alert("L'email inserita non è valida.");
-                return false;
-            }
-
-            if (password.length < 8) {
-                alert("La password deve contenere almeno 8 caratteri.");
-                return false;
-            }
-
-            if (!/^\d{6}$/.test(numeroTessera)) {
-                alert("Il numero di tessera deve essere di 6 cifre.");
-                return false;
-            }
-
-            if (!/^\d{16}$/.test(numeroCartaCredito)) {
-                alert("Il numero della carta di credito deve essere di 16 cifre.");
-                return false;
-            }
-
-            if (!/^\d{5}$/.test(cap)) {
-                alert("Il CAP deve essere di 5 cifre.");
-                return false;
-            }
-
-            var dati = {
-                nome: nome,
-                cognome: cognome,
-                email: email,
-                password: password,
-                numeroTessera:numeroTessera,
-                numeroCartaCredito: numeroCartaCredito,
-                stato: stato,
-                provincia: provincia,
-                paese: paese,
-                cap: cap,
-                via: via
-            };
-
-            $.get("../signup.php", dati, function(data) {
-                if(status === false) {
-                alert("Registrazione fallita");
-            } else if(status === true) {
-                window.location = "index.php";
-            }            });
-
-        }
-
-        function printResponse(status) {
-            if(status === false) {
-                alert("Registrazione fallita");
-            } else if(status === true) {
-                window.location = "index.php";
-            }
-        }
-    </script>
+    <script src="../js/signup.js"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -144,8 +55,18 @@ else if(!isset($_SESSION["is_admin"])){
                                 <input type="password" class="form-control" id="password">
                             </div>
                             <div class="form-group">
+                                <label for="conferma_password">Conferma Password</label>
+                                <input type="password" class="form-control" id="conferma_password">
+                            </div>
+                            <div class="form-group">
                                 <label for="numeroTessera">Numero tessera</label>
                                 <input type="text" class="form-control" id="numeroTessera">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="is_admin">
+                                    <label class="form-check-label" for="is_admin">Admin</label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -175,12 +96,11 @@ else if(!isset($_SESSION["is_admin"])){
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="registra">Registrati</button>
-                    <button type="button" class="btn btn-secondary" id="tornaIndietro">Torna alla login</button>
+                    <button type="button" class="btn btn-primary" id="conferma">Conferma</button>
+                    <button type="button" class="btn btn-secondary" id="admin">Admin</button>
                 </form>
             </div>
         </div>
     </div>
 </body>
 </html>
-

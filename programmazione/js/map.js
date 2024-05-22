@@ -1,7 +1,9 @@
+class map{
 // Initialize and add the map
-let map;
-
-async function initMap() {
+constructor() {
+  this.map = null;
+}
+async initMap() {
   // The location of Milano
   const position = { lat: 45.4627338, lng: 9.1777323 };
   // Request needed libraries.
@@ -10,16 +12,16 @@ async function initMap() {
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   // The map, centered at Milano
-  map = new Map(document.getElementById("map"), {
+  this.map = new Map(document.getElementById("map"), {
     zoom: 11,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
 
-  set_posizion_stazione(AdvancedMarkerElement);
+  set_posizione_stazione(AdvancedMarkerElement);
 }
 
-function set_posizion_stazione(AdvancedMarkerElement) {
+ set_posizione_stazione(AdvancedMarkerElement) {
   // Ottengo tutte le stazioni dal db
   $.get("../AJAX/set_position.php", {}, function (data) {
     // console.log(data);
@@ -39,4 +41,8 @@ function set_posizion_stazione(AdvancedMarkerElement) {
   }, 'json');
 }
 
-initMap();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const mapAdminInstance = new map();
+  mapAdminInstance.initMap();
+});

@@ -23,6 +23,9 @@ if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Includi il CSS personalizzato -->
     <link rel="stylesheet" type="text/css" href="../style/style_login.css">
+    <!-- Includi Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
 
     <script>
         function check_login() {
@@ -48,6 +51,9 @@ if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
             $("#login_button").click(function () {
                 check_login();
             });
+            $("#index").click(function () {
+                window.location.href = "index.php";
+            });
         });
     </script>
 </head>
@@ -59,14 +65,16 @@ if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
             <h1 class="mb-4">Login</h1>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Inserisci il tuo username">
+                <input type="text" id="username" name="username" class="form-control"
+                    placeholder="Inserisci il tuo username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Inserisci la tua password">
+                <input type="password" id="password" name="password" class="form-control"
+                    placeholder="Inserisci la tua password">
             </div>
             <button type="button" class="btn btn-primary btn-block" id="login_button">Login</button>
-            <p class="register-link mt-3">Non hai un account? <a href="signUp.php">Registrati</a></p>
+            <i class="fa-solid fa-house"  id="index"></i>
         </div>
 
     </div>

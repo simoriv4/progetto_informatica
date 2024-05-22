@@ -47,7 +47,7 @@ if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         <button type="button" class="btn btn-primary mr-2" id="login_button">Login</button>
-        <button type="button" class="btn btn-secondary" id="signup_button">Sign Up</button>
+        <!-- <button type="button" class="btn btn-secondary" id="signup_button">Sign Up</button> -->
 
       </div>
     </div>

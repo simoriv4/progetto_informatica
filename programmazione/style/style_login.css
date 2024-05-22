@@ -28,3 +28,9 @@ h1 {
 .register-link a {
     color: #A0522D; /* Marrone */
 }
+
+.fa-house {
+    font-size: 200px; /* Imposta la dimensione desiderata */
+    color: #A0522D; /* Cambia colore se necessario */
+    cursor: pointer; /* Aggiungi il cursore pointer per indicare che è cliccabile */
+}
