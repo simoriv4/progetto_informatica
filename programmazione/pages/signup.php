@@ -1,6 +1,17 @@
 <?php
 if (!isset($_SESSION))
     session_start();
+
+if(isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"]))
+{
+    echo("l'utente non ha i permessi per effettuare l'operazione");
+    header("Location : index.php");
+    die;
+}
+else if(($_SESSION["is_admin"])){
+    // utente non loggato
+    header("Location: login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -140,7 +151,7 @@ if (!isset($_SESSION))
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="numeroCartaCredito">Numero carta di credito</label>
-                                <input type="text" class="form-control" id="numeroCartaCredito">
+                                <input type="number" class="form-control" id="numeroCartaCredito">
                             </div>
                             <div class="form-group">
                                 <label for="stato">Stato</label>
@@ -156,7 +167,7 @@ if (!isset($_SESSION))
                             </div>
                             <div class="form-group">
                                 <label for="cap">CAP</label>
-                                <input type="text" class="form-control" id="cap">
+                                <input type="number" class="form-control" id="cap">
                             </div>
                             <div class="form-group">
                                 <label for="via">Via</label>

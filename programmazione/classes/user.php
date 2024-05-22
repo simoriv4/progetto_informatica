@@ -54,64 +54,64 @@ class user
 
     public function signUp($user, $password, $mail, $smart_card, $ID_indirizzo)
     {
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-        //  controllo che l'untente non esista
-        if (!$this->check_credential($user, $password)) {
-            $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
+        // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        // //  controllo che l'untente non esista
+        // if (!$this->check_credential($user, $password)) {
+        //     $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
 
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            try {
+        //     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        //     try {
 
-                // Inizio la transazione
-                $conn->begin_transaction();
-                // faccio l'md5 sulla password
-                $hashed_password = md5($password);
+        //         // Inizio la transazione
+        //         $conn->begin_transaction();
+        //         // faccio l'md5 sulla password
+        //         $hashed_password = md5($password);
 
-                $is_studente = $this->is_studente($user);
-                if ($is_studente) {
-                    // Preparazione dell'inserimento
-                    $insert = $conn->prepare("INSERT INTO `studenti` (username, password, email, ID_classe) VALUES (?, ?, ?, ?)");
-                    // prendo l'id della classe
-                    $id_class = $this->get_id_class($classes[0]);
-                    // Verifica se l'ID della classe è valido
-                    if ($id_class !== null) {
-                        // Associazione dei parametri non ancora settati
-                        $insert->bind_param("sssi", $user, $hashed_password, $mail, $id_class);
-                    }
-                    // Esecuzione della query
-                    if (!$insert->execute())
-                        return false;
-                } else {
-                    // Preparazione dell'inserimento professore
-                    $insert = $conn->prepare("INSERT INTO `professori` (username, password, email) VALUES (?, ?, ?)");
-                    // Associazione dei parametri non ancora settati
-                    $insert->bind_param("sss", $user, $hashed_password, $mail);
+        //         $is_studente = $this->is_studente($user);
+        //         if ($is_studente) {
+        //             // Preparazione dell'inserimento
+        //             $insert = $conn->prepare("INSERT INTO `studenti` (username, password, email, ID_classe) VALUES (?, ?, ?, ?)");
+        //             // prendo l'id della classe
+        //             $id_class = $this->get_id_class($classes[0]);
+        //             // Verifica se l'ID della classe è valido
+        //             if ($id_class !== null) {
+        //                 // Associazione dei parametri non ancora settati
+        //                 $insert->bind_param("sssi", $user, $hashed_password, $mail, $id_class);
+        //             }
+        //             // Esecuzione della query
+        //             if (!$insert->execute())
+        //                 return false;
+        //         } else {
+        //             // Preparazione dell'inserimento professore
+        //             $insert = $conn->prepare("INSERT INTO `professori` (username, password, email) VALUES (?, ?, ?)");
+        //             // Associazione dei parametri non ancora settati
+        //             $insert->bind_param("sss", $user, $hashed_password, $mail);
 
-                    // Esecuzione della query di inserimento professore indipendentemente dallo studente
-                    if (!$insert->execute()) {
-                        throw new Exception("Errore durante l'inserimento del professore");
-                    }
+        //             // Esecuzione della query di inserimento professore indipendentemente dallo studente
+        //             if (!$insert->execute()) {
+        //                 throw new Exception("Errore durante l'inserimento del professore");
+        //             }
 
-                    $classes_array = $this->get_id_class($classes);
-                    // creo tuple insegna  per ogni classe in cui insegna un prof
-                    if (!$this->assegna_classi($user, $conn, $classes_array)) {
-                        throw new Exception("Errore durante l'assegnazione delle classi al professore");
-                    }
-                }
+        //             $classes_array = $this->get_id_class($classes);
+        //             // creo tuple insegna  per ogni classe in cui insegna un prof
+        //             if (!$this->assegna_classi($user, $conn, $classes_array)) {
+        //                 throw new Exception("Errore durante l'assegnazione delle classi al professore");
+        //             }
+        //         }
 
-                // Committo la transazione se tutte le operazioni sono avvenute con successo
-                $conn->commit();
-                $insert->close();
-                $conn->close();
-                return true;
-            } catch (Exception $e) {
-                // Rollback in caso di eccezione
-                $conn->rollback();
-                $insert->close();
-                $conn->close();
-                return false;
-            }
-        }   
+        //         // Committo la transazione se tutte le operazioni sono avvenute con successo
+        //         $conn->commit();
+        //         $insert->close();
+        //         $conn->close();
+        //         return true;
+        //     } catch (Exception $e) {
+        //         // Rollback in caso di eccezione
+        //         $conn->rollback();
+        //         $insert->close();
+        //         $conn->close();
+        //         return false;
+        //     }
+        // }   
     }
 
    

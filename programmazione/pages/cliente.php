@@ -1,7 +1,18 @@
 <?php
 if (!isset($_SESSION))
     session_start();
+
+if(isset($_SESSION["is_admin"]) && ($_SESSION["is_admin"]))
+{
+    header("Location : index.php");
+    die;
+}
+else if($_SESSION["is_admin"]){
+    // utente non loggato
+    header("Location: admin.php");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
