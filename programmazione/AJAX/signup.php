@@ -22,14 +22,30 @@ $cognome = $_GET["cognome"];
 $email = $_GET["email"];
 $password = $_GET["password"];
 $conferma_password = $_GET["conferma_password"];
-$numeroTessera = $_GET["numeroTessera"];
 $numeroCartaCredito = $_GET["numeroCartaCredito"];
-$stato = $_GET["stato"];
+$regione = $_GET["regione"];
 $provincia = $_GET["provincia"];
 $paese = $_GET["paese"];
 $cap = $_GET["cap"];
 $via = $_GET["via"];
-$is_admin = isset($_GET["is_admin"]) ? $_GET["is_admin"] : false;
+$n_civico = $_GET["n_civico"];
+$is_admin = $_GET['is_admin'];
 
-// eseguo la funzione per la registrazione
-$result = $user->signUp($nome, $cognome, $email, $password, $conferma_password, $numeroTessera, $numeroCartaCredito, $stato, $provincia, $paese, $cap, $via, $is_admin);
+$result = $user->signUp($nome, $cognome, $email, $password, $conferma_password, $numeroCartaCredito, $regione, $provincia, $paese, $cap, $via, $n_civico, $is_admin);
+
+if($result){
+    $response["status"] = "ok";
+    $response["message"] = "utente registrato correttamente";
+}
+else if(!$result){
+    $response["status"] = "ko";
+    $response["message"] = "errore durante la registrazione";
+}
+else{
+    $response["status"] = "ko";
+    $response["message"] = $result;
+}
+
+echo json_encode($response);
+
+?>

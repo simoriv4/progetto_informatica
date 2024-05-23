@@ -2,13 +2,11 @@
 if (!isset($_SESSION))
     session_start();
 
-if(isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"]))
-{
-    echo("L'utente non ha i permessi per effettuare l'operazione");
+if (isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"])) {
+    echo ("L'utente non ha i permessi per effettuare l'operazione");
     header("Location: index.php");
     die;
-}
-else if(!isset($_SESSION["is_admin"])){
+} else if (!isset($_SESSION["is_admin"])) {
     // utente non loggato
     header("Location: login.php");
 }
@@ -30,6 +28,7 @@ else if(!isset($_SESSION["is_admin"])){
 
     <script src="../js/signup.js"></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="card">
@@ -59,24 +58,19 @@ else if(!isset($_SESSION["is_admin"])){
                                 <input type="password" class="form-control" id="conferma_password">
                             </div>
                             <div class="form-group">
-                                <label for="numeroTessera">Numero tessera</label>
-                                <input type="text" class="form-control" id="numeroTessera">
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="is_admin">
-                                    <label class="form-check-label" for="is_admin">Admin</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label for="numeroCartaCredito">Numero carta di credito</label>
                                 <input type="number" class="form-control" id="numeroCartaCredito">
                             </div>
                             <div class="form-group">
-                                <label for="stato">Stato</label>
-                                <input type="text" class="form-control" id="stato">
+                                <label for="is_admin">Admin</label>
+                                <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin">
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="regione">Regione</label>
+                                <input type="text" class="form-control" id="regione">
                             </div>
                             <div class="form-group">
                                 <label for="provincia">Provincia</label>
@@ -94,6 +88,10 @@ else if(!isset($_SESSION["is_admin"])){
                                 <label for="via">Via</label>
                                 <input type="text" class="form-control" id="via">
                             </div>
+                            <div class="form-group">
+                                <label for="n_civico">Numero Civico</label>
+                                <input type="number" class="form-control" id="n_civico">
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary" id="conferma">Conferma</button>
@@ -103,4 +101,5 @@ else if(!isset($_SESSION["is_admin"])){
         </div>
     </div>
 </body>
+
 </html>

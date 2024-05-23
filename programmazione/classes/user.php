@@ -27,7 +27,7 @@ class user
         $mysqli = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
         // query select
         $query = "SELECT * FROM `user` WHERE  username='$user' AND password=MD5('$password')";
-        
+
         $result = $mysqli->query($query);
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
@@ -40,8 +40,7 @@ class user
             // imposto se l'utente è admin o no
             if ($result->num_rows > 0) {
                 $_SESSION["is_admin"] = true;
-            }
-            else{
+            } else {
                 $_SESSION["is_admin"] = false;
             }
 
@@ -51,7 +50,7 @@ class user
         $mysqli->close();
         return false; // utente non esistente
     }
-    
+
     public function check_credential_sign_up($user)
     {
         // controllo se esiste un account con quello username
@@ -66,101 +65,133 @@ class user
         $mysqli->close();
         return false; // utente già esistente
     }
-    public function signUp($nome, $cognome, $email, $password, $conferma_password, $numeroTessera, $numeroCartaCredito, $stato, $provincia, $paese, $cap, $via, $is_admin)
+    public function signUp($nome, $cognome, $email, $password, $conferma_password, $numeroCartaCredito, $regione, $provincia, $paese, $cap, $via, $n_civico, $is_admin)
     {
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    
-        // Controlla se l'utente esiste già
-        if ($this->check_credential_sign_up($email)) {
-            return false; // Utente già registrato
+        // controllo che sia disponibile l'utente
+        $is_free = $this->check_credential_sign_up($email);
+        if (!$is_free) {
+            return false;
         }
-    
-        // Verifica se la password e la conferma della password corrispondono
+
         if ($password !== $conferma_password) {
-            return false; // Le password non corrispondono
+            return false;
         }
-    
-        // Cripta la password
+
         $hashed_password = md5($password);
-    
-        // Connessione al database
         $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
-        $conn->autocommit(false); // Abilita le transazioni
-    
+        $conn->autocommit(false);
+
         try {
-            // prendo l'id dell'indirizzo
-            $id_indirizzo= $this->get_id_indirizzo($stato, $paese, $provincia, $cap, $via);
-            // Inserisci l'utente nella tabella `user`
-            $query = "INSERT INTO `user` (username, password, smart_cart, ID_indirizzo) VALUES ('$email', '$hashed_password', 'smart_cart_value', $id_indirizzo)";
+
+            $address = "$n_civico $via, $paese";
+            // ottengo lat e lon
+            $coordinates = $this->getCoordinates($address);
+            $lat = $coordinates["lat"];
+            $lon = $coordinates["lng"];
+            // prendo id dell'inidrizzo
+            $id_indirizzo = $this->get_id_indirizzo($regione, $paese, $provincia, $cap, $via, $n_civico, $lat, $lon);
+            // genero una nuova smart card per l'utente
+            $smart_card = $this->smart_card();
+            // inserisco l'utente
+            $query = "INSERT INTO `user` (username, password,nome, cognome, smart_card, ID_indirizzo) VALUES ('$email', '$hashed_password','$nome','$cognome', '$smart_card', $id_indirizzo)";
             if (!$conn->query($query)) {
                 throw new Exception("Errore durante l'inserimento dell'utente nella tabella 'user'");
             }
-    
-            // Ottieni l'ID dell'utente appena inserito
+
             $user_id = $conn->insert_id;
-    
-            // Se l'utente è un amministratore, aggiungi anche un record nella tabella `admin`
+
             if ($is_admin) {
                 $query = "INSERT INTO `admin` (ID_user) VALUES ($user_id)";
                 if (!$conn->query($query)) {
                     throw new Exception("Errore durante l'inserimento dell'utente nella tabella 'admin'");
                 }
             } else {
-                // Se l'utente non è un amministratore, aggiungi un record nella tabella `cliente`
-                $query = "INSERT INTO `cliente` (ID_user, numero_carta, smart_card) VALUES ($user_id, $numeroCartaCredito, 'smart_card_value')";
+                $query = "INSERT INTO `cliente` (ID_user, numero_carta, smart_card) VALUES ($user_id, $numeroCartaCredito, '$smart_card')";
                 if (!$conn->query($query)) {
                     throw new Exception("Errore durante l'inserimento dell'utente nella tabella 'cliente'");
                 }
             }
-    
-            // Esegui il commit delle transazioni
+
             $conn->commit();
-            $conn->autocommit(true); // Ripristina l'autocommit
+            $conn->autocommit(true);
             $conn->close();
-            return true; // Registrazione avvenuta con successo
+            return true;
         } catch (Exception $e) {
-            // Rollback in caso di eccezione
             $conn->rollback();
-            $conn->autocommit(true); // Ripristina l'autocommit
+            $conn->autocommit(true);
             $conn->close();
-            return false; // Errore durante la registrazione
+            return false;
         }
     }
-    
 
-   
-    public function get_id_indirizzo($stato, $paese, $provincia, $cap, $via)
+
+    public function smart_card()
     {
         // Connessione al database
         $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
-        
-        // Controllo se l'indirizzo esiste già nel database
-        $query = "SELECT ID FROM `indirizzo` WHERE stato='$stato' AND paese='$paese' AND provincia='$provincia' AND CAP='$cap' AND via='$via'";
+
+        while (true) {
+            // Genera una sequenza casuale di 6 cifre
+            $smart_card = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+
+            // Controlla se la smart card generata è univoca
+            $query = "SELECT * FROM `user` WHERE smart_card = '$smart_card'";
+            $result = $conn->query($query);
+
+            // Se non ci sono utenti con la stessa smart card, restituisci quella generata
+            if ($result->num_rows == 0) {
+                $conn->close();
+                return $smart_card;
+            }
+        }
+
+        // Chiudi la connessione solo quando il ciclo è terminato (che in questo caso non si verificherà mai)
+        $conn->close();
+    }
+
+    public function get_id_indirizzo($regione, $paese, $provincia, $cap, $via, $n_civico, $lat, $lon)
+    {
+        $conn = new mysqli($this->servername, $this->username_db, $this->password_db, $this->dbname);
+
+        $query = "SELECT ID FROM `indirizzo` WHERE regione='$regione' AND paese='$paese' AND provincia='$provincia' AND CAP='$cap' AND via='$via' AND n_civico='$n_civico' AND lat='$lat' AND lon='$lon'";
         $result = $conn->query($query);
-        
+
         if ($result->num_rows > 0) {
-            // L'indirizzo esiste già, ritorno l'ID dell'indirizzo
             $row = $result->fetch_assoc();
             $id_indirizzo = $row['ID'];
         } else {
-            // L'indirizzo non esiste, lo creo
-            $query = "INSERT INTO `indirizzo` (stato, paese, provincia, CAP, via) VALUES ('$stato', '$paese', '$provincia', '$cap', '$via')";
-            if ($conn->query($query)) {
-                // Recupero l'ID dell'indirizzo appena creato
+            $query_insert = "INSERT INTO `indirizzo` (regione, paese, provincia, CAP, via, n_civico, lat, lon) VALUES ('$regione', '$paese', '$provincia', '$cap', '$via', '$n_civico', '$lat', '$lon')";
+            if ($conn->query($query_insert)) {
                 $id_indirizzo = $conn->insert_id;
             } else {
-                // Errore durante l'inserimento dell'indirizzo
                 $id_indirizzo = null;
             }
         }
-        
-        // Chiudo la connessione al database
+
         $conn->close();
-    
-        // Ritorno l'ID dell'indirizzo
         return $id_indirizzo;
     }
-    
+    // funzione per ottenere da via paese e n civico --> lat e lng
+    public function getCoordinates($address)
+    {
+        $apiKey = 'AIzaSyAr14sRK-gZQduBqjL4a6ioX0laYlu590A';
+        $address = urlencode($address);
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apiKey}";
+
+        $response = file_get_contents($url);
+        $json = json_decode($response, true);
+
+        if (isset($json['results'][0])) {
+            $lat = $json['results'][0]['geometry']['location']['lat'];
+            $lng = $json['results'][0]['geometry']['location']['lng'];
+            return array('lat' => $lat, 'lng' => $lng);
+        } else {
+            return null;
+        }
+    }
+
+
+
 
 }
 ?>
