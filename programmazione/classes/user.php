@@ -32,6 +32,7 @@ class user
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             //controllo se è admin o meno
+            $_SESSION["ID_user"] = $row["ID"];
             //query
             $id = $row["ID"];
             $query = "SELECT * FROM `admin` WHERE ID_user='$id'";

@@ -19,7 +19,7 @@ if (isset($_SESSION['is_admin']) && $_SESSION["is_admin"]) {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../style/style_index.css" />
+  <link rel="stylesheet" type="text/css" href="../style/style_index.css">
 
   <script type="module" src="../js/map.js"></script>
 

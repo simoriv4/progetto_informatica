@@ -1,17 +1,15 @@
 body {
-    background-color: #E0FFFF; /* Celeste pallido */
-    color: #4682B4; /* Blu acciaio */
+    background-color: #F0F8FF; /* Blu alice */
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
+#intestazione {
     padding: 20px;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    color: #4682B4; /* Blu acciaio */
+    border: none;
 }
 
 .btn-primary {
@@ -25,6 +23,88 @@ h1 {
     border-color: #4169E1; /* Blu reale */
 }
 
-.rides {
+.btn-secondary {
+    background-color: #87CEEB; /* Azzurro cielo */
+    border-color: #4682B4; /* Blu acciaio */
+    color: #ffffff; /* Bianco */
+}
+
+.btn-secondary:hover {
+    background-color: #00BFFF; /* Blu azzurro */
+    border-color: #4682B4; /* Blu acciaio */
+}
+
+#map {
+    height: 500px;
+    width: 100%;
     margin-top: 20px;
+    border-radius: 10px;
+    border: 2px solid #4682B4; /* Blu acciaio */
+}
+
+/* Personalizzazione DataTable */
+#myTable_wrapper {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#myTable_wrapper .dataTables_length {
+    margin-bottom: 10px;
+}
+
+#myTable_wrapper .dataTables_filter input {
+    margin-left: 10px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#myTable_wrapper .dataTables_paginate .paginate_button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    margin-right: 5px;
+}
+
+#myTable_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #ccc;
+}
+
+#myTable_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e0e0e0;
+}
+
+#myTable_wrapper .dataTables_info {
+    margin-bottom: 10px;
+}
+
+#myTable th,
+#myTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+}
+
+#myTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#myTable tbody tr:hover {
+    background-color: #f0f0f0;
+}
+#myTable th:nth-child(1),
+#myTable td:nth-child(1) {
+    width: 100px; /* Imposta la larghezza della prima colonna */
+}
+
+#myTable th:nth-child(2),
+#myTable td:nth-child(2) {
+    width: 150px; /* Imposta la larghezza della seconda colonna */
 }
