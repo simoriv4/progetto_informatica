@@ -3,7 +3,7 @@ if (!isset($_SESSION))
     session_start();
 
 if (isset($_SESSION["is_admin"]) && !($_SESSION["is_admin"])) {
-    echo json_encode(array("status" => "ko", "message" => "L'utente non ha i permessi per effettuare l'operazione"));
+    header("Location: index.php");
     exit();
 } else if (!isset($_SESSION["is_admin"])) {
     // utente non loggato
@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
         $html .= "<td>" . $row['numero_slot'] . "</td>";
         $html .= "<td>" . $row['via'] . " " . $row['n_civico'] . ", " . $row['paese'] . "</td>";
         $html .= "<td><button class='remove' id='" . $row['id_stazione'] . "'>Rimuovi</button></td>";
-        $html .= "<td><button class='modifica'>Modifica</button></td>";
+        $html .= "<td><button class='modifica'id='" . $row['id_stazione'] . "'>Modifica</button></td>";
         $html .= "</tr>";
     }
     $html .= "</tbody>";

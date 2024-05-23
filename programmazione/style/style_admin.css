@@ -1,5 +1,5 @@
 body {
-    background-color: #E0C097; /* Colore beige dal logo */
+    background-color: #E0FFFF; /* Celeste pallido */
 }
 
 #intestazione {
@@ -8,28 +8,30 @@ body {
 }
 
 h1 {
-    color: #A0522D; /* Marrone dal logo */
+    color: #4682B4; /* Blu acciaio */
     border: none;
 }
 
 .btn-primary {
-    background-color: #A0522D; /* Marrone */
-    border-color: #A0522D; /* Marrone */
+    background-color: #4682B4; /* Blu acciaio */
+    border-color: #4682B4; /* Blu acciaio */
+    color: #ffffff; /* Bianco */
 }
 
 .btn-primary:hover {
-    background-color: #8B4513; /* Marrone scuro */
-    border-color: #8B4513; /* Marrone scuro */
+    background-color: #4169E1; /* Blu reale */
+    border-color: #4169E1; /* Blu reale */
 }
 
 .btn-secondary {
-    background-color: #FFD700; /* Oro dal logo */
-    border-color: #A0522D; /* Marrone */
+    background-color: #87CEEB; /* Azzurro cielo */
+    border-color: #4682B4; /* Blu acciaio */
+    color: #ffffff; /* Bianco */
 }
 
 .btn-secondary:hover {
-    background-color: #FFA500; /* Arancione */
-    border-color: #A0522D; /* Marrone */
+    background-color: #00BFFF; /* Blu azzurro */
+    border-color: #4682B4; /* Blu acciaio */
 }
 
 #map {
@@ -37,8 +39,9 @@ h1 {
     width: 100%;
     margin-top: 20px;
     border-radius: 10px;
-    border: 2px solid #A0522D; /* Bordo marrone */
+    border: 2px solid #4682B4; /* Blu acciaio */
 }
+
 /* Stile per la navbar */
 .navbar {
     position: fixed;

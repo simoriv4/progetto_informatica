@@ -14,7 +14,7 @@ class map {
 
     // The map, centered at Milano
     this.map = new Map(document.getElementById("map"), {
-      zoom: 11,
+      zoom: 12,
       center: position,
       mapId: "DEMO_MAP_ID",
     });

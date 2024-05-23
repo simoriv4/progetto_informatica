@@ -24,11 +24,14 @@ if (isset($_SESSION['is_admin']) && !$_SESSION["is_admin"]) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Includi Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <!-- DataTables CSS e JS -->
-    <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
-    <link rel="stylesheet" href="../style/style_table.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <!-- Script personalizzato -->
     <script src="../js/gestione_stazioni.js"></script>
+    <link rel="stylesheet" href="../style/style_table.css">
+
 </head>
 
 <body>

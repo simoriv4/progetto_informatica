@@ -23,7 +23,7 @@ $dbname = "noleggio_bici";
 
 // Creo la connessione con il database
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+$response = array();
 // Controllo della connessione
 if ($conn->connect_error) {
     $response["status"] = "ko";
@@ -31,34 +31,31 @@ if ($conn->connect_error) {
     echo json_encode($response);
     exit();
 }
-
-// Verifico se l'ID è stato passato come parametro
-if (isset($_GET['id_stazione'])) {
-    $id_stazione = $_GET['id_stazione'];
-
-    // Preparo la query per eliminare la stazione
-    $stmt = $conn->prepare("DELETE FROM stazione WHERE ID = ?");
-    $stmt->bind_param("i", $id_stazione);
-
-    // Eseguo la query
-    if ($stmt->execute()) {
+ if(isset($_GET["id"])){
+    $id = $_GET["id"];
+    $select = "SELECT nome, numero_slot
+    FROM stazione
+    WHERE ID='$id'";
+    // eseguo la query
+    $result = $conn->query($select);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // salvo il nome e il numero slot
         $response["status"] = "ok";
-        $response["message"] = "Stazione rimossa correttamente";
-    } else {
-        $response["status"] = "ko";
-        $response["message"] = "Errore nell'esecuzione della query";
+
+        $response["nome"] = $row["nome"];
+        $response["n_slot"] = $row["numero_slot"];
     }
-
-    // Chiudo lo statement
-    $stmt->close();
-} else {
+    else{
+        $response["status"] = "ko";
+        $response["message"] = "Stazione non trovata";
+    }
+ }
+ else{
     $response["status"] = "ko";
-    $response["message"] = "ID stazione non fornito";
-}
+    $response["message"] = "Errore nell'invio dei dati";
+ }
 
-// Chiudo la connessione
-$conn->close();
-
-// Invio la risposta JSON
 echo json_encode($response);
+
 ?>

@@ -1,6 +1,6 @@
 body {
-    background-color: #fff; /* Colore di sfondo */
-    color: #333; /* Colore del testo */
+    background-color: #E0FFFF; /* Celeste pallido */
+    color: #4682B4; /* Blu acciaio */
 }
 
 .container {
@@ -15,16 +15,16 @@ h1 {
 }
 
 .btn-primary {
-    background-color: #dc3545; /* Rosso vivace */
-    border-color: #dc3545; /* Rosso vivace */
+    background-color: #4682B4; /* Blu acciaio */
+    border-color: #4682B4; /* Blu acciaio */
+    color: #ffffff; /* Bianco */
 }
 
 .btn-primary:hover {
-    background-color: #c82333; /* Rosso scuro al passaggio del mouse */
-    border-color: #c82333; /* Rosso scuro al passaggio del mouse */
+    background-color: #4169E1; /* Blu reale */
+    border-color: #4169E1; /* Blu reale */
 }
 
 .rides {
     margin-top: 20px;
 }
-

@@ -9,7 +9,6 @@ $(document).ready(function () {
         window.location.href = "admin.php";
     });
 
-
     // Delego l'evento click al documento per gestire i pulsanti dinamici
     $(document).on("click", ".remove", function () {
         let id = $(this).attr("id");
@@ -22,14 +21,6 @@ $(document).ready(function () {
             }
         }, 'json');
     });
-
-    $(document).on("click", ".modifica", function () {
-        let id = $(this).attr("id");
-        // imposto nella sessione la variabile id
-        sessionStorage.setItem("id_stazione", id);
-        window.location.href = "menu_modifica_stazione.php";
-    });
-
 });
 
 function gestione_stazioni() {
@@ -39,6 +30,7 @@ function gestione_stazioni() {
             if ($.fn.DataTable.isDataTable('#myTable')) {
                 $('#myTable').DataTable().destroy();
             }
+
             // Rimuovi tutti i dati precedenti dalla tabella
             $('#myTable').empty();
             $("#myTable").html(data["message"]);
