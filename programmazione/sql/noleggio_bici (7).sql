@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 23, 2024 alle 11:44
+-- Creato il: Mag 23, 2024 alle 23:56
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -62,6 +62,13 @@ CREATE TABLE `bicicletta` (
   `is_locked` tinyint(1) NOT NULL,
   `RFID` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `bicicletta`
+--
+
+INSERT INTO `bicicletta` (`ID`, `numero_seriale`, `marca`, `codice_GPS`, `is_locked`, `RFID`) VALUES
+(1, 1234567890, 'bianchi', '4567098767', 1, 'G000001');
 
 -- --------------------------------------------------------
 
@@ -124,7 +131,57 @@ INSERT INTO `indirizzo` (`ID`, `CAP`, `via`, `n_civico`, `paese`, `regione`, `pr
 (28, 22045, 'Roma', 29, 'Lambrugo', 'Lombradia', 'Como', 45.7603710, 9.2415671),
 (29, 22045, 'Stoppanni', 2, 'lambrugo', 'Lombradia', 'como', 45.7574019, 9.2418510),
 (30, 22045, 'stoppani', 2, 'lambrugo', 'lombardia', 'como', 45.7574019, 9.2418510),
-(31, 22045, 'roma', 3, 'lambrugo', 'lomabrdia', 'como', 45.7603710, 9.2415671);
+(31, 22045, 'roma', 3, 'lambrugo', 'lomabrdia', 'como', 45.7603710, 9.2415671),
+(32, 20100, 'Via 8422', 2, 'Milano', 'Lombardia', 'MI', 45.4737719, 9.2266430),
+(33, 20100, 'Via 4031', 30, 'Milano', 'Lombardia', 'MI', 45.4797911, 9.2204343),
+(34, 20100, 'Via 6076', 41, 'Milano', 'Lombardia', 'MI', 45.4714500, 9.1953833),
+(35, 20100, 'Via 4588', 25, 'Milano', 'Lombardia', 'MI', 45.4816404, 9.2489412),
+(36, 20100, 'Via 7440', 31, 'Milano', 'Lombardia', 'MI', 45.4820828, 9.2399435),
+(37, 20100, 'Via 4138', 63, 'Milano', 'Lombardia', 'MI', 45.4823330, 9.2440656),
+(38, 20100, 'Via 7633', 91, 'Milano', 'Lombardia', 'MI', 45.4904017, 9.1867748),
+(39, 20100, 'Via 144', 21, 'Milano', 'Lombardia', 'MI', 45.4891441, 9.1822150),
+(40, 20100, 'Via 62', 98, 'Milano', 'Lombardia', 'MI', 45.4906836, 9.2442766),
+(41, 20100, 'Via 1906', 29, 'Milano', 'Lombardia', 'MI', 45.4877950, 9.2223239),
+(42, 20100, 'Via 9013', 94, 'Milano', 'Lombardia', 'MI', 45.4951468, 9.2204474),
+(43, 20100, 'Via 5683', 26, 'Milano', 'Lombardia', 'MI', 45.4812791, 9.2430435),
+(44, 20100, 'Via 7980', 91, 'Milano', 'Lombardia', 'MI', 45.4933605, 9.2113975),
+(45, 20100, 'Via 3633', 75, 'Milano', 'Lombardia', 'MI', 45.4743037, 9.2196231),
+(46, 20100, 'Via 8052', 76, 'Milano', 'Lombardia', 'MI', 45.4635636, 9.1921179),
+(47, 20100, 'Via 2421', 60, 'Milano', 'Lombardia', 'MI', 45.4788858, 9.2196083),
+(48, 20100, 'Via 2038', 42, 'Milano', 'Lombardia', 'MI', 45.4746459, 9.2214789),
+(49, 20100, 'Via 5047', 87, 'Milano', 'Lombardia', 'MI', 45.4817597, 9.1888874),
+(50, 20100, 'Via 4042', 1, 'Milano', 'Lombardia', 'MI', 45.4853329, 9.1910657),
+(51, 20100, 'Via 694', 90, 'Milano', 'Lombardia', 'MI', 45.4991190, 9.1952977),
+(52, 20100, 'Via 1960', 16, 'Milano', 'Lombardia', 'MI', 45.4655290, 9.1950376),
+(53, 20100, 'Via 7731', 66, 'Milano', 'Lombardia', 'MI', 45.4861088, 9.1999705),
+(54, 20100, 'Via 984', 47, 'Milano', 'Lombardia', 'MI', 45.4794248, 9.1816242),
+(55, 20100, 'Via 5760', 66, 'Milano', 'Lombardia', 'MI', 45.4690466, 9.1907348),
+(56, 20100, 'Via 7665', 9, 'Milano', 'Lombardia', 'MI', 45.4992541, 9.2249337),
+(57, 20100, 'Via 6541', 27, 'Milano', 'Lombardia', 'MI', 45.4760694, 9.1948539),
+(58, 20100, 'Via 5992', 86, 'Milano', 'Lombardia', 'MI', 45.4856933, 9.2251013),
+(59, 20100, 'Via 163', 30, 'Milano', 'Lombardia', 'MI', 45.4815889, 9.2370519),
+(60, 20100, 'Via 4583', 46, 'Milano', 'Lombardia', 'MI', 45.4933906, 9.2364142),
+(61, 20100, 'Via 9822', 53, 'Milano', 'Lombardia', 'MI', 45.4683479, 9.2127331),
+(62, 20100, 'Via 5058', 72, 'Milano', 'Lombardia', 'MI', 45.4662839, 9.2254664),
+(63, 20100, 'Via 2088', 78, 'Milano', 'Lombardia', 'MI', 45.4973187, 9.2035147),
+(64, 20100, 'Via 6176', 89, 'Milano', 'Lombardia', 'MI', 45.4758324, 9.2035828),
+(65, 20100, 'Via 3229', 50, 'Milano', 'Lombardia', 'MI', 45.4789841, 9.2417283),
+(66, 20100, 'Via 371', 99, 'Milano', 'Lombardia', 'MI', 45.4712519, 9.2115283),
+(67, 20100, 'Via 1765', 41, 'Milano', 'Lombardia', 'MI', 45.4875784, 9.1956029),
+(68, 20100, 'Via 1913', 5, 'Milano', 'Lombardia', 'MI', 45.4824748, 9.2269709),
+(69, 20100, 'Via 3822', 67, 'Milano', 'Lombardia', 'MI', 45.4733687, 9.2263916),
+(70, 20100, 'Via 9977', 32, 'Milano', 'Lombardia', 'MI', 45.4826774, 9.2431109),
+(71, 20100, 'Via 9619', 81, 'Milano', 'Lombardia', 'MI', 45.4732341, 9.1963028),
+(72, 20100, 'Via 4499', 18, 'Milano', 'Lombardia', 'MI', 45.4664377, 9.2002255),
+(73, 20100, 'Via 3846', 97, 'Milano', 'Lombardia', 'MI', 45.4976973, 9.2378632),
+(74, 20100, 'Via 381', 31, 'Milano', 'Lombardia', 'MI', 45.4619634, 9.2029645),
+(75, 20100, 'Via 8745', 50, 'Milano', 'Lombardia', 'MI', 45.4792460, 9.2448577),
+(76, 20100, 'Via 3891', 19, 'Milano', 'Lombardia', 'MI', 45.4666643, 9.1985713),
+(77, 20100, 'Via 4364', 83, 'Milano', 'Lombardia', 'MI', 45.4735034, 9.1945478),
+(78, 20100, 'Via 9733', 3, 'Milano', 'Lombardia', 'MI', 45.4803358, 9.2123997),
+(79, 20100, 'Via 4549', 79, 'Milano', 'Lombardia', 'MI', 45.4822733, 9.2091852),
+(80, 20100, 'Via 3615', 42, 'Milano', 'Lombardia', 'MI', 45.4927992, 9.2400203),
+(81, 20100, 'Via 9720', 83, 'Milano', 'Lombardia', 'MI', 45.4825532, 9.2036231);
 
 -- --------------------------------------------------------
 
@@ -140,6 +197,16 @@ CREATE TABLE `operazione` (
   `ID_user` int(11) NOT NULL,
   `ID_bicicletta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `operazione`
+--
+
+INSERT INTO `operazione` (`ID`, `tipo`, `data_ora`, `tariffa`, `ID_user`, `ID_bicicletta`) VALUES
+(5, 'noleggio', '2024-05-23 12:00:00', 10, 14, 1),
+(6, 'consegna', '2024-05-23 14:00:00', 0, 14, 1),
+(7, 'noleggio', '2024-05-24 10:00:00', 15, 14, 1),
+(8, 'consegna', '2024-05-24 12:00:00', 0, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -159,18 +226,55 @@ CREATE TABLE `stazione` (
 --
 
 INSERT INTO `stazione` (`ID`, `nome`, `numero_slot`, `ID_indirizzo`) VALUES
-(32, 's1', 10, 13),
-(33, 's2', 40, 14),
-(34, 's3', 50, 15),
-(35, 's4', 50, 16),
-(36, 's5', 50, 17),
-(37, 'a6', 30, 18),
-(38, 's7', 25, 19),
-(39, 's8', 100, 20),
-(40, 's9', 60, 21),
-(41, 'a10', 30, 22),
-(42, 's11', 40, 23),
-(43, 's12', 10, 24);
+(290, 'Stazione 2', 15, 33),
+(291, 'Stazione 3', 14, 32),
+(292, 'Stazione 4', 5, 81),
+(293, 'Stazione 5', 21, 44),
+(294, 'Stazione 6', 9, 42),
+(295, 'Stazione 7', 16, 51),
+(296, 'Stazione 8', 7, 17),
+(297, 'Stazione 9', 16, 69),
+(298, 'Stazione 10', 18, 15),
+(299, 'Stazione 11', 20, 19),
+(300, 'Stazione 12', 7, 52),
+(301, 'Stazione 13', 13, 62),
+(302, 'Stazione 14', 22, 61),
+(303, 'Stazione 15', 5, 36),
+(304, 'Stazione 16', 6, 64),
+(305, 'Stazione 17', 23, 20),
+(306, 'Stazione 18', 15, 49),
+(307, 'Stazione 19', 10, 65),
+(308, 'Stazione 20', 19, 67),
+(309, 'Stazione 21', 5, 50),
+(310, 'Stazione 22', 18, 73),
+(311, 'Stazione 23', 11, 45),
+(312, 'Stazione 24', 24, 23),
+(313, 'Stazione 25', 19, 76),
+(314, 'Stazione 26', 6, 79),
+(315, 'Stazione 27', 23, 38),
+(316, 'Stazione 28', 21, 46),
+(317, 'Stazione 29', 22, 80),
+(318, 'Stazione 30', 14, 57),
+(319, 'Stazione 31', 20, 18),
+(320, 'Stazione 32', 11, 48),
+(321, 'Stazione 33', 16, 63),
+(322, 'Stazione 34', 12, 56),
+(323, 'Stazione 35', 14, 41),
+(324, 'Stazione 36', 23, 66),
+(325, 'Stazione 37', 18, 53),
+(326, 'Stazione 38', 13, 75),
+(327, 'Stazione 39', 18, 22),
+(328, 'Stazione 40', 14, 78),
+(329, 'Stazione 41', 19, 68),
+(330, 'Stazione 42', 17, 16),
+(331, 'Stazione 43', 24, 21),
+(332, 'Stazione 44', 19, 34),
+(333, 'Stazione 45', 15, 37),
+(334, 'Stazione 46', 10, 55),
+(335, 'Stazione 47', 14, 72),
+(336, 'Stazione 48', 8, 77),
+(337, 'Stazione 49', 23, 71),
+(338, 'Stazione 50', 13, 13);
 
 -- --------------------------------------------------------
 
@@ -253,6 +357,7 @@ ALTER TABLE `operazione`
 --
 ALTER TABLE `stazione`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `ID_indirizzo_2` (`ID_indirizzo`),
   ADD KEY `ID_indirizzo` (`ID_indirizzo`);
 
 --
@@ -278,7 +383,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT per la tabella `bicicletta`
 --
 ALTER TABLE `bicicletta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `cliente`
@@ -290,19 +395,19 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT per la tabella `operazione`
 --
 ALTER TABLE `operazione`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `stazione`
 --
 ALTER TABLE `stazione`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
 
 --
 -- AUTO_INCREMENT per la tabella `user`
