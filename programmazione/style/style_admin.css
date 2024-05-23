@@ -39,3 +39,31 @@ h1 {
     border-radius: 10px;
     border: 2px solid #A0522D; /* Bordo marrone */
 }
+/* Stile per la navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 70px; /* Altezza più sottile */
+    padding: 5px 10px; /* Riduci il padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Aggiungi un'ombra per migliorare la visibilità */
+}
+
+.navbar .navbar-brand img {
+    height: 60px; /* Adatta l'altezza del logo */
+    width: 60px;
+}
+
+.navbar .navbar-nav .nav-item .btn {
+    font-size: 14px; /* Dimensione del testo più piccola */
+    padding: 5px 10px; /* Riduci il padding dei pulsanti */
+}
+
+body {
+    padding-top: 60px; /* Compensa l'altezza della navbar */
+}
+
+.container {
+    margin-top: 20px; /* Aggiungi un margine superiore per evitare la sovrapposizione con la navbar */
+}

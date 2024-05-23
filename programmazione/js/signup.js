@@ -14,7 +14,6 @@ function signUp() {
     var email = $("#email").val();
     var password = $("#password").val();
     var conferma_password = $("#conferma_password").val();
-    var numeroTessera = $("#numeroTessera").val();
     var numeroCartaCredito = $("#numeroCartaCredito").val();
     var regione = $("#regione").val();
     var provincia = $("#provincia").val();
@@ -24,41 +23,41 @@ function signUp() {
     var n_civico = $("#n_civico").val();
     var is_admin = $("#is_admin").prop("checked") ? 1 : 0; 
 
-    // if (!nome || !cognome || !email || !password || !conferma_password || !numeroCartaCredito ||
-    //     !regione || !provincia || !paese || !cap || !via) {
-    //     alert("Tutti i campi sono obbligatori.");
-    //     return false;
-    // }
+    if (!nome || !cognome || !email || !password || !conferma_password || !numeroCartaCredito ||
+        !regione || !provincia || !paese || !cap || !via) {
+        alert("Tutti i campi sono obbligatori.");
+        return false;
+    }
 
-    // if (!/^[a-zA-Z ]+$/.test(nome) || !/^[a-zA-Z ]+$/.test(cognome)) {
-    //     alert("Nome e cognome devono contenere solo lettere e spazi.");
-    //     return false;
-    // }
+    if (!/^[a-zA-Z ]+$/.test(nome) || !/^[a-zA-Z ]+$/.test(cognome)) {
+        alert("Nome e cognome devono contenere solo lettere e spazi.");
+        return false;
+    }
 
-    // if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-    //     alert("L'email inserita non è valida.");
-    //     return false;
-    // }
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+        alert("L'email inserita non è valida.");
+        return false;
+    }
 
-    // if (password.length < 8) {
-    //     alert("La password deve contenere almeno 8 caratteri.");
-    //     return false;
-    // }
+    if (password.length < 8) {
+        alert("La password deve contenere almeno 8 caratteri.");
+        return false;
+    }
 
-    // if (password != conferma_password) {
-    //     alert("Le password non corrispondono!");
-    //     return false;
-    // }
+    if (password != conferma_password) {
+        alert("Le password non corrispondono!");
+        return false;
+    }
 
-    // if (isNaN(numeroCartaCredito) || numeroCartaCredito.length !== 16) {
-    //     alert("Il numero della carta di credito deve essere di 16 cifre e deve essere un numero.");
-    //     return false;
-    // }
+    if (isNaN(numeroCartaCredito) || numeroCartaCredito.length !== 16) {
+        alert("Il numero della carta di credito deve essere di 16 cifre e deve essere un numero.");
+        return false;
+    }
 
-    // if (isNaN(cap) || cap.length !== 5) {
-    //     alert("Il CAP deve essere di 5 cifre e deve essere un numero.");
-    //     return false;
-    // }
+    if (isNaN(cap) || cap.length !== 5) {
+        alert("Il CAP deve essere di 5 cifre e deve essere un numero.");
+        return false;
+    }
 
     $.ajax({
         url: "../AJAX/signup.php",
@@ -69,7 +68,6 @@ function signUp() {
             email: email,
             password: password,
             conferma_password: conferma_password,
-            numeroTessera: numeroTessera,
             numeroCartaCredito: numeroCartaCredito,
             regione: regione,
             provincia: provincia,

@@ -1,5 +1,4 @@
 <?php
-// faccio gli opportuni controlli se l'utente ha i permessi di accedere alla pagina
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -25,62 +24,54 @@ if (isset($_SESSION['is_admin']) && !$_SESSION["is_admin"]) {
     <link rel="stylesheet" type="text/css" href="../style/style_admin.css">
     <!-- Includi Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
+    <script type="module" src="../js/map.js"></script>
     <script type="module" src="../js/admin.js"></script>
 
-    <script>
-        function show_rides() {
-            $.get("../AJAX/show_rides.php", {}, function (data) {
-                if (data["status"] == "ok") {
-                    $("#rides").html(data["html"]);
-                } else if (data["status"] == "ko") {
-                    alert(data["message"]);
-                }
-            }, 'json');
-        }
-        function logout() {
-            $.get("../AJAX/logout.php", {}, function (data) {
-                if (data["status"] == "ok") {
-                    window.location.href = "login.php";
-                }
-                else if (data["status"] == "ko") {
-                    alert(data["message"]);
-                }
-            }, 'json');
-        }
-        $(document).ready(function () {
-            show_rides();
-            $("#logout").click(function () {
-                logout();
-            });
-            $("#signup_button").click(function () {
-                window.location.href = "signup.php";
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-8">
-                <div id="intestazione" class="d-flex align-items-center">
-                    <img src="../img/logo2.png" alt="Noleggio Riva" class="mb-4" width="150">
-                    <h1 class="mb-4">Noleggio Biciclette RIVA</h1>
-                </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../img/logo2.png" alt="Noleggio Riva" width="150">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-secondary mr-2" id="logout">Logout</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-secondary" id="signup_button">Sign Up</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-secondary" id="gestione_bici">Gestione Bici</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-secondary" id="gestione_stazioni">Gestione Stazioni</button>
+                    </li>
+                </ul>
             </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-                <button type="button" class="btn btn-secondary mr-2" id="logout">Logout</button>
-                <button type="button" class="btn btn-secondary" id="signup_button">Sign Up</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Noleggio Biciclette RIVA</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-12">
                 <div id="map" class="mt-5"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-12">
                 <div id="rides" class="mt-5"></div>
             </div>
         </div>
